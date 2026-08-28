@@ -1,0 +1,428 @@
+/* ============================================================
+   ARCHIVO: css/style.css
+   ¿QUÉ ES ESTO?: Aquí decimos CÓMO se ve cada cosa que escribimos
+   en el HTML: de qué color es, qué tan grande, dónde está ubicada,
+   qué letra usa, etc.
+
+   TRUCO PARA NIÑOS 🧒: Si quieres cambiar un color de TODA la
+   página, no busques por todo el archivo. Solo baja hasta la
+   sección "1) COLORES" de aquí abajo y cambia el color ahí.
+   Como esos colores están guardados en "variables", ¡se
+   actualizan en toda la página automáticamente!
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   1) COLORES Y MEDIDAS (VARIABLES)
+   Una "variable" es como una cajita con un nombre, donde
+   guardamos un valor para volver a usarlo muchas veces.
+   Ejemplo: en vez de escribir "#0b1f3a" 20 veces, escribimos
+   "var(--azul-noche)" y cambiamos el color UNA sola vez aquí.
+   ------------------------------------------------------------ */
+:root {
+  /* 🎨 Colores inspirados en la portada del libro (estilo "Noche
+     Estrellada" de Van Gogh): azules profundos, dorado de las
+     estrellas y un rosa suave de la boina del personaje. */
+  --azul-noche: #0b1c3d;      /* Azul oscuro principal (fondos) */
+  --azul-medio: #1c3f6e;      /* Azul un poco más claro (detalles) */
+  --azul-brillante: #3a6ea5;  /* Azul más vivo (bordes, hover) */
+  --dorado: #e8b84b;          /* Dorado de las estrellas (acentos) */
+  --dorado-suave: #f2d38a;    /* Dorado clarito (fondos suaves) */
+  --rosa-boina: #e88ba0;      /* Rosa de la boina (detalle especial) */
+  --crema: #f7f1e3;           /* Crema/blanco cálido (fondo de texto) */
+  --blanco: #ffffff;          /* Blanco puro */
+  --texto-oscuro: #1c1c1c;    /* Color de letra sobre fondos claros */
+  --whatsapp-verde: #25d366;  /* Verde oficial de WhatsApp */
+
+  /* 📏 Medidas que se repiten, para que todo quede parejo */
+  --radio-borde: 18px;         /* Qué tan "redonditas" son las esquinas */
+  --sombra-suave: 0 10px 30px rgba(11, 28, 61, 0.18);
+  --ancho-maximo: 1100px;      /* Ancho máximo del contenido en pantallas grandes */
+}
+
+
+/* ------------------------------------------------------------
+   2) RESET BÁSICO
+   Cada navegador (Chrome, Firefox...) trae "de fábrica" espacios
+   y estilos distintos. Con esto, empezamos todos "desde cero"
+   y parejo, para que no haya sorpresas.
+   ------------------------------------------------------------ */
+* {
+  margin: 0;              /* Sin espacio extra afuera de las cosas */
+  padding: 0;              /* Sin espacio extra adentro de las cosas */
+  box-sizing: border-box; /* El ancho/alto incluye el borde y el relleno */
+}
+
+html {
+  scroll-behavior: smooth; /* Al hacer clic en un enlace interno, se desliza suave */
+}
+
+/* ==================================================================
+   ARCHIVO CSS COMENTADO
+   Este archivo tiene el mismo código original, pero con explicación
+   de qué hace cada línea o bloque de reglas.
+   ================================================================== */
+
+
+/* ------------------------------------------------------------
+   1) ESTILOS GENERALES DEL BODY (toda la página)
+   ------------------------------------------------------------ */
+body {
+  font-family: 'Poppins', sans-serif; /* Fuente principal del texto normal. Si Poppins no carga, usa cualquier fuente "sans-serif" del sistema */
+  background-color: var(--crema);     /* Color de fondo de toda la página, tomado de una variable CSS (definida en :root en otra parte del archivo) */
+  color: var(--texto-oscuro);         /* Color del texto por defecto */
+  line-height: 1.6;                   /* Espacio entre líneas: 1.6 veces el tamaño de la letra, para que el texto "respire" y sea más legible */
+}
+
+
+/* Títulos siempre con la letra elegante */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif; /* Los títulos usan una tipografía distinta (serif elegante) para diferenciarse del texto normal */
+}
+
+img {
+  max-width: 100%;  /* Ninguna imagen se sale de su caja: nunca puede ser más ancha que su contenedor */
+  display: block;   /* Quita el espacio "fantasma" que las imágenes tienen por defecto al ser inline, y evita mal alineado con texto */
+}
+
+a {
+  text-decoration: none; /* Quita el subrayado de los enlaces */
+  color: inherit;         /* El link usa el color del texto que lo rodea, en vez del azul por defecto del navegador */
+}
+
+
+/* ------------------------------------------------------------
+   3) ENCABEZADO (HEADER)
+   Fondo azul noche con un "cielo estrellado" hecho solo con CSS
+   (círculos pequeños repetidos), sin necesitar otra imagen.
+   ------------------------------------------------------------ */
+.header {
+  background:
+    /* Varias "estrellitas" hechas con gradientes radiales.
+       Cada línea dibuja un puntito circular en una posición (X%, Y%)
+       del fondo. Como no hay más colores luego de "100%", se ve como
+       un círculo sólido pequeño, no un degradado real. */
+    radial-gradient(2px 2px at 20% 30%, var(--dorado) 100%, transparent 0),   /* estrella dorada */
+    radial-gradient(2px 2px at 60% 15%, var(--blanco) 100%, transparent 0),  /* estrella blanca */
+    radial-gradient(1.5px 1.5px at 80% 40%, var(--dorado) 100%, transparent 0), /* estrella dorada más pequeña */
+    radial-gradient(1.5px 1.5px at 35% 70%, var(--blanco) 100%, transparent 0), /* estrella blanca más pequeña */
+    radial-gradient(2px 2px at 90% 80%, var(--dorado) 100%, transparent 0),  /* estrella dorada */
+    radial-gradient(1.5px 1.5px at 10% 85%, var(--blanco) 100%, transparent 0), /* estrella blanca */
+    /* Y debajo de las estrellas, un degradado azul de noche.
+       Esta es la última capa de "background", así que queda de fondo,
+       detrás de todos los puntitos de arriba. */
+    linear-gradient(160deg, var(--azul-noche), var(--azul-medio));
+  color: var(--crema);   /* Color del texto dentro del header */
+  text-align: center;    /* Centra el texto horizontalmente */
+  padding: 70px 20px 60px; /* Espacio interno: arriba 70px, lados 20px, abajo 60px */
+}
+
+.header__estrella {
+  color: var(--dorado);       /* Color dorado para el símbolo decorativo (ej: ✦ ✧ ✦) */
+  letter-spacing: 10px;       /* Separación entre las estrellitas de texto, para que se vean espaciadas */
+  margin-bottom: 10px;        /* Espacio debajo antes del siguiente elemento */
+  font-size: 14px;            /* Tamaño de letra pequeño */
+}
+
+.header__titulo {
+  font-size: clamp(2.2rem, 5vw, 3.4rem); /* Tamaño de letra fluido: nunca menor a 2.2rem ni mayor a 3.4rem, 
+                                             usando 5% del ancho de pantalla (5vw) como valor preferido.
+                                             Así se adapta automáticamente sin necesitar media queries. */
+  font-weight: 700;      /* Letra en negrita (bold) */
+  letter-spacing: 1px;   /* Ligera separación entre letras */
+}
+
+.header__subtitulo {
+  margin-top: 12px;             /* Espacio arriba, separándolo del título */
+  font-size: 1.05rem;           /* Tamaño de letra levemente mayor al normal */
+  color: var(--dorado-suave);   /* Color dorado suave para diferenciarlo del título */
+  font-style: italic;           /* Letra en cursiva */
+}
+
+
+/* ------------------------------------------------------------
+   4) SECCIÓN DE LIBROS
+   ------------------------------------------------------------ */
+.libros {
+  max-width: var(--ancho-maximo); /* Ancho máximo de la sección, tomado de una variable CSS global */
+  margin: 0 auto;      /* Centra la sección horizontalmente en la página (0 arriba/abajo, auto a los lados) */
+  padding: 60px 20px;  /* Espacio interno arriba/abajo de 60px, y a los lados de 20px */
+}
+
+/* La "rejilla" (grid) donde se acomodan las tarjetas de libros.
+   Si algún día hay 2, 3 o 10 libros, se van a acomodar solos
+   en filas y columnas, sin que tengas que tocar nada. */
+.libros__grid {
+  display: grid; /* Activa el modo de diseño en rejilla (grid) */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Crea tantas columnas como quepan;
+                                                                    cada columna mide mínimo 280px y máximo
+                                                                    "una fracción" (1fr) del espacio disponible.
+                                                                    Esto hace el grid responsive automáticamente. */
+  gap: 40px; /* Espacio de 40px entre tarjetas, tanto en filas como en columnas */
+}
+
+/* Cada tarjeta de libro (JavaScript crea una por cada libro) */
+.tarjeta-libro {
+  background: var(--blanco);        /* Fondo blanco de la tarjeta */
+  border-radius: var(--radio-borde); /* Bordes redondeados, usando una variable global de radio */
+  overflow: hidden; /* Recorta cualquier contenido (como la imagen) que se salga de las esquinas redondas */
+  box-shadow: var(--sombra-suave);  /* Sombra suave alrededor de la tarjeta, definida como variable */
+  display: flex;              /* Activa flexbox para organizar el contenido interno */
+  flex-direction: column;     /* Los elementos internos (imagen, cuerpo) se apilan verticalmente */
+  transition: transform 0.25s ease; /* Prepara una animación suave de 0.25s cuando cambie la posición/escala (para el hover de abajo) */
+}
+
+.tarjeta-libro:hover {
+  transform: translateY(-6px); /* Al pasar el mouse, la tarjeta "se levanta" 6px hacia arriba */
+}
+
+.tarjeta-libro__imagen-wrap {
+  background: var(--azul-noche); /* Fondo azul oscuro detrás de la portada del libro */
+  display: flex;                 /* Flexbox para centrar la imagen */
+  justify-content: center;       /* Centra la imagen horizontalmente */
+  padding: 20px;                 /* Espacio alrededor de la imagen */
+}
+
+.tarjeta-libro__imagen {
+  width: 220px;                             /* Ancho fijo de la portada del libro */
+  border-radius: 8px;                       /* Esquinas ligeramente redondeadas */
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4); /* Sombra pronunciada debajo de la imagen, para darle profundidad */
+}
+
+.tarjeta-libro__cuerpo {
+  padding: 24px 26px 28px; /* Espacio interno: arriba 24px, lados 26px, abajo 28px */
+  display: flex;           /* Flexbox para el contenido de texto */
+  flex-direction: column;  /* Apila título, autor, descripción, precio y botón verticalmente */
+  gap: 10px;                /* Espacio de 10px entre cada uno de esos elementos */
+}
+
+.tarjeta-libro__titulo {
+  font-size: 1.6rem;         /* Tamaño de letra grande para el título del libro */
+  color: var(--azul-noche);  /* Color azul oscuro */
+}
+
+.tarjeta-libro__autor {
+  color: var(--azul-brillante); /* Color azul brillante para destacar el nombre del autor */
+  font-weight: 600;             /* Semi-negrita */
+  font-size: 0.95rem;           /* Tamaño de letra levemente menor al normal */
+}
+
+.tarjeta-libro__descripcion {
+  font-size: 0.97rem; /* Tamaño de letra un poco menor, para el texto descriptivo */
+  color: #444;         /* Gris oscuro para la descripción (no usa variable, color fijo) */
+}
+
+.tarjeta-libro__precio {
+  font-size: 1.3rem;         /* Tamaño de letra grande, para que el precio resalte */
+  font-weight: 700;          /* Negrita */
+  color: var(--rosa-boina);  /* Color rosa/boina, para diferenciarlo del resto del texto */
+  margin-top: 6px;           /* Pequeño espacio arriba, separándolo de la descripción */
+}
+
+/* Botón "Comprar por WhatsApp" dentro de cada tarjeta */
+.tarjeta-libro__boton {
+  margin-top: 10px;        /* Espacio arriba, separándolo del precio */
+  display: inline-flex;    /* Flexbox en línea, para alinear ícono + texto dentro del botón */
+  align-items: center;     /* Centra verticalmente el contenido del botón */
+  justify-content: center; /* Centra horizontalmente el contenido del botón */
+  gap: 8px;                 /* Espacio entre el ícono y el texto del botón */
+  background: var(--whatsapp-verde); /* Fondo verde estilo WhatsApp */
+  color: var(--blanco);              /* Texto blanco */
+  font-weight: 600;                  /* Semi-negrita */
+  padding: 12px 18px;                /* Espacio interno del botón */
+  border-radius: 999px; /* Valor exagerado que fuerza bordes completamente redondos (forma de píldora) */
+  transition: filter 0.2s ease; /* Prepara animación suave para el cambio de brillo al hacer hover */
+}
+
+.tarjeta-libro__boton:hover {
+  filter: brightness(1.08); /* Al pasar el mouse, el botón se ve un 8% más brillante (efecto de feedback visual) */
+}
+
+
+/* ------------------------------------------------------------
+   5) SECCIÓN DE COMENTARIOS
+   ------------------------------------------------------------ */
+.comentarios {
+  background: var(--azul-noche); /* Fondo azul oscuro para toda la sección de comentarios */
+  padding: 60px 20px 80px;       /* Espacio interno: arriba 60px, lados 20px, abajo 80px */
+}
+
+.comentarios__titulo,
+.comentarios__ayuda {
+  text-align: center;   /* Centra ambos textos horizontalmente */
+  color: var(--crema);  /* Color crema (claro) para que contraste con el fondo azul oscuro */
+}
+
+.comentarios__titulo {
+  font-size: 2rem;      /* Tamaño de letra grande para el título de la sección */
+  margin-bottom: 8px;   /* Pequeño espacio debajo, antes del subtítulo de ayuda */
+}
+
+.comentarios__ayuda {
+  color: var(--dorado-suave); /* Sobrescribe el color crema anterior con un dorado suave */
+  margin-bottom: 30px;        /* Espacio debajo, antes del formulario */
+}
+
+/* Formulario para dejar comentario */
+.formulario {
+  max-width: 560px;               /* El formulario no crece más de. 560px de ancho */
+  margin: 0 auto 50px;            /* Centrado horizontal, con 50px de espacio debajo */
+  background: var(--blanco);      /* Fondo blanco, contrastando con el fondo azul de la sección */
+  padding: 26px;                  /* Espacio interno alrededor de todos los campos */
+  border-radius: var(--radio-borde); /* Bordes redondeados, igual que las tarjetas de libros */
+  box-shadow: var(--sombra-suave);   /* Sombra suave para darle relieve */
+  display: flex;             /* Flexbox para organizar los campos */
+  flex-direction: column;    /* Apila los campos verticalmente (nombre, mensaje, botón) */
+  gap: 14px;                  /* Espacio de 14px entre cada campo */
+}
+
+.formulario__campo {
+  font-family: 'Poppins', sans-serif; /* Misma fuente que el resto del sitio, para que el input se vea consistente */
+  font-size: 1rem;                     /* Tamaño de letra estándar */
+  padding: 12px 14px;                  /* Espacio interno del campo, para que el texto no quede pegado al borde */
+  border: 2px solid #e3ddce;           /* Borde delgado en un tono beige claro */
+  border-radius: 10px;                 /* Esquinas redondeadas */
+  outline: none; /* Quita el borde azul feo por defecto del navegador al hacer foco */
+  transition: border-color 0.2s ease; /* Anima el cambio de color del borde de forma suave */
+}
+
+.formulario__campo:focus {
+  border-color: var(--dorado); /* Se ilumina de dorado cuando el usuario hace clic/escribe en el campo (reemplaza el outline quitado arriba) */
+}
+
+.formulario__campo--textarea {
+  min-height: 100px; /* Altura mínima del área de texto grande (mensaje) */
+  resize: vertical;   /* Solo se puede estirar hacia abajo, no a los lados, para no romper el diseño */
+}
+
+.formulario__boton {
+  font-family: 'Poppins', sans-serif; /* Misma fuente del sitio */
+  font-weight: 600;                    /* Semi-negrita */
+  font-size: 1rem;                     /* Tamaño de letra estándar */
+  background: var(--dorado);           /* Fondo dorado, llamativo */
+  color: var(--azul-noche);            /* Texto azul oscuro, para contraste con el fondo dorado */
+  border: none;                        /* Sin borde */
+  padding: 13px;                       /* Espacio interno del botón */
+  border-radius: 10px;                 /* Esquinas redondeadas */
+  cursor: pointer; /* Muestra la manita al pasar el mouse, indicando que es clicable */
+  transition: background 0.2s ease; /* Anima el cambio de color de fondo de forma suave */
+}
+
+.formulario__boton:hover {
+  background: var(--dorado-suave); /* Al pasar el mouse, el fondo cambia a un dorado más suave */
+}
+
+/* Lista de comentarios ya publicados */
+.lista-comentarios {
+  max-width: 700px;    /* Ancho máximo de la lista de comentarios */
+  margin: 0 auto;      /* Centrada horizontalmente */
+  list-style: none;    /* Quita los puntitos (bullets) por defecto de la lista <ul> */
+  display: flex;             /* Flexbox para organizar los comentarios */
+  flex-direction: column;    /* Apila los comentarios verticalmente */
+  gap: 14px;                  /* Espacio de 14px entre cada comentario */
+}
+
+.comentario {
+  background: var(--azul-medio);   /* Fondo azul medio para cada bloque de comentario */
+  color: var(--crema);              /* Texto en color crema, para contraste */
+  padding: 16px 20px;               /* Espacio interno del comentario */
+  border-radius: 14px;              /* Esquinas redondeadas */
+  border-left: 4px solid var(--dorado); /* Franja dorada gruesa a la izquierda, como acento decorativo */
+}
+
+.comentario__cabecera {
+  display: flex;                  /* Flexbox para poner nombre y fecha en la misma línea */
+  justify-content: space-between; /* Nombre a la izquierda, fecha a la derecha (extremos opuestos) */
+  align-items: baseline;          /* Alinea nombre y fecha por la línea base del texto (aunque tengan tamaños distintos) */
+  margin-bottom: 6px;             /* Espacio debajo, antes del mensaje del comentario */
+}
+
+.comentario__nombre {
+  font-weight: 700;              /* Negrita para destacar el nombre */
+  color: var(--dorado-suave);    /* Color dorado suave */
+}
+
+.comentario__fecha {
+  font-size: 0.75rem; /* Letra pequeña para la fecha, ya que es información secundaria */
+  color: #b9c6de;      /* Azul grisáceo claro, discreto */
+}
+
+.comentario__mensaje {
+  font-size: 0.95rem; /* Tamaño de letra estándar para el cuerpo del mensaje */
+}
+
+/* Mensaje que se muestra cuando todavía no hay comentarios */
+.sin-comentarios {
+  text-align: center;          /* Centrado horizontalmente */
+  color: var(--dorado-suave);  /* Color dorado suave */
+  font-style: italic;          /* Cursiva, para diferenciarlo de un comentario real */
+}
+
+
+/* ------------------------------------------------------------
+   6) PIE DE PÁGINA (FOOTER)
+   ------------------------------------------------------------ */
+.footer {
+  text-align: center;   /* Centra el texto del footer */
+  padding: 24px;        /* Espacio interno alrededor de todo el footer */
+  background: var(--azul-noche); /* Mismo azul oscuro que el header, para dar coherencia visual */
+  color: #9fb0cc;        /* Azul grisáceo claro para el texto */
+  font-size: 0.85rem;    /* Letra pequeña, ya que es información secundaria (copyright, etc.) */
+  border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea sutil blanca casi transparente (8% opacidad) que separa el footer del contenido */
+}
+
+
+/* ------------------------------------------------------------
+   7) BOTÓN FLOTANTE DE WHATSAPP
+   "position: fixed" hace que el botón se quede pegado en la
+   pantalla aunque el usuario baje o suba la página.
+   ------------------------------------------------------------ */
+.whatsapp-flotante {
+  position: fixed;   /* El botón queda "pegado" a la ventana del navegador, no se mueve al hacer scroll */
+  bottom: 26px;       /* Distancia de 26px desde abajo de la pantalla */
+  right: 26px;        /* Distancia de 26px desde la derecha de la pantalla */
+  width: 60px;        /* Ancho del botón */
+  height: 60px;       /* Alto del botón (igual al ancho, para que sea un círculo perfecto con border-radius) */
+  background: var(--whatsapp-verde); /* Fondo verde estilo WhatsApp */
+  color: var(--blanco);              /* Color del ícono/texto interno */
+  border-radius: 50%; /* Convierte el elemento cuadrado en un círculo perfecto */
+  display: flex;             /* Flexbox para centrar el ícono dentro del círculo */
+  align-items: center;       /* Centra verticalmente */
+  justify-content: center;   /* Centra horizontalmente */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra debajo del botón, dándole efecto flotante/elevado */
+  animation: latido 2.4s infinite; /* Aplica la animación "latido" (definida abajo), repitiéndola cada 2.4s para siempre */
+  z-index: 999; /* Asegura que el botón se dibuje por encima de todo lo demás en la página */
+}
+
+/* Animación tipo "latido de corazón" para llamar la atención,
+   pero sin ser molesta (es lenta y suave). */
+@keyframes latido {
+  0%   { transform: scale(1); }    /* Tamaño normal al inicio del ciclo */
+  10%  { transform: scale(1.12); } /* Al 10% del tiempo, crece un 12% (efecto de "pulso") */
+  20%  { transform: scale(1); }    /* Al 20% del tiempo, vuelve a su tamaño normal */
+  100% { transform: scale(1); }    /* Se mantiene en tamaño normal el resto del ciclo (80% restante quieto) */
+}
+
+
+/* ------------------------------------------------------------
+   8) RESPONSIVE (que se vea bien en celulares)
+   Una "media query" dice: "estas reglas solo aplican SI la
+   pantalla mide menos de tantos píxeles de ancho".
+   ------------------------------------------------------------ */
+@media (max-width: 600px) { /* Todo lo de aquí adentro solo aplica si la pantalla mide 600px de ancho o menos (celulares) */
+  .header {
+    padding: 50px 16px 40px; /* Reduce el espacio interno del header en pantallas pequeñas */
+  }
+
+  .comentario__cabecera {
+    flex-direction: column; /* Cambia de horizontal a vertical: nombre arriba, fecha abajo */
+    gap: 2px;                /* Espacio pequeño entre nombre y fecha al estar apilados */
+  }
+
+  .whatsapp-flotante {
+    width: 54px;   /* Botón un poco más chico en celulares */
+    height: 54px;
+    bottom: 18px;  /* Más cerca de la esquina, para no ocupar tanto espacio en pantallas pequeñas */
+    right: 18px;
+  }
+}

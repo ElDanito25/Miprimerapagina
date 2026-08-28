@@ -1,0 +1,156 @@
+<!-- 
+  ==========================================================================
+  ARCHIVO: index.html
+  ¿QUÉ ES ESTO?: Es el "esqueleto" de la página web. Aquí escribimos QUÉ
+  cosas aparecen en la pantalla (títulos, imágenes, botones, textos).
+
+  El diseño (colores, tamaños, letras bonitas) está en la carpeta "css".
+  El comportamiento (que pase algo cuando hago clic) está en la carpeta "js".
+
+  Así separamos todo en 3 partes, como una casa:
+   - HTML  = los ladrillos y las habitaciones (la estructura)
+   - CSS   = la pintura, los muebles, la decoración (cómo se ve)
+   - JS    = la electricidad, las puertas que se abren solas (lo interactivo)
+  ==========================================================================
+-->
+<!DOCTYPE html> <!-- Le dice al navegador: "esto es una página web moderna (HTML5)" -->
+<html lang="es"> <!-- Toda la página, escrita en español -->
+
+<head>
+  <!-- El "head" (cabeza) no se ve en la pantalla. Es información secreta
+       para el navegador: el título de la pestaña, el ícono, dónde está
+       el CSS, qué letras (fuentes) vamos a usar, etc. -->
+
+  <meta charset="UTF-8" />
+  <!-- Esto permite usar tildes y la letra "ñ" sin que se vean raras -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Esto hace que la página se vea bien tanto en un celular como en una
+       computadora grande. Es OBLIGATORIO para que sea "responsiva". -->
+
+  <title>Paola Gutiérrez - Inagotable</title>
+  <!-- Este texto aparece en la pestaña del navegador -->
+
+  <!-- Ícono pequeño que aparece en la pestaña (usamos la portada del libro) -->
+  <link rel="icon" href="img/inagotable.png" type="image/png" />
+
+  <!-- Aquí conectamos nuestra hoja de estilos (el CSS). 
+       Si algún día quieres cambiar colores o tamaños, ve al archivo
+       css/style.css, NO aquí. -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Traemos 2 tipos de letra bonitas desde Google Fonts:
+       - "Playfair Display": letra elegante para los títulos
+       - "Poppins": letra redonda y fácil de leer para los textos -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- El "body" (cuerpo) es TODO lo que sí se ve en la pantalla -->
+
+  <!-- ======================================================
+       1) ENCABEZADO (lo que se ve siempre arriba de la página)
+       ====================================================== -->
+  <header class="header" id="inicio">
+    <div class="header__contenido">
+      <p class="header__estrella">✦ ✧ ✦</p>
+      <h1 class="header__titulo">Paola Gutiérrez</h1>
+      <p class="header__subtitulo">Historias de amor, perdón y redención</p>
+    </div>
+  </header>
+
+  <!-- ======================================================
+       2) SECCIÓN "MIS LIBROS": aquí el JavaScript va a pintar
+       automáticamente cada libro (por ahora solo "Inagotable",
+       pero si agregas más libros en js/script.js, aparecerán
+       solos aquí, sin tocar este HTML). 
+       ====================================================== -->
+  <main>
+    <section class="libros" id="libros">
+
+      <!-- Este <div> empieza VACÍO a propósito.secc
+           El archivo js/script.js va a "llenarlo" con tarjetas de libros
+           usando JavaScript. Así, si en el futuro agregas un libro nuevo,
+           SOLO tienes que editar la lista de libros en el JS, y no tienes
+           que copiar y pegar HTML. Eso es lo que significa "escalable". -->
+      <div id="contenedor-libros" class="libros__grid">
+        <!-- 📚 Aquí aparecerán las tarjetas de libros (JavaScript las crea) -->
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         3) SECCIÓN DE COMENTARIOS
+         Aquí la gente puede escribir su opinión sobre el libro
+         y verla aparecer en una lista debajo.
+         ====================================================== -->
+    <section class="comentarios" id="comentarios">
+      <h2 class="comentarios__titulo">💬 Comentarios de los lectores</h2>
+      <p class="comentarios__ayuda">
+        Cuéntanos qué te pareció <strong>Inagotable</strong>
+      </p>
+
+      <!-- Formulario para escribir un comentario nuevo -->
+      <form id="formulario-comentario" class="formulario">
+        <input
+          type="text"
+          id="input-nombre"
+          class="formulario__campo"
+          placeholder="Tu nombre"
+          required
+        />
+        <textarea
+          id="input-mensaje"
+          class="formulario__campo formulario__campo--textarea"
+          placeholder="Escribe tu comentario aquí..."
+          required
+        ></textarea>
+        <button type="submit" class="formulario__boton">
+          Publicar comentario
+        </button>
+      </form>
+
+      <!-- Aquí el JavaScript va a poner cada comentario que la gente escriba -->
+      <ul id="lista-comentarios" class="lista-comentarios">
+        <!-- 💬 Aquí aparecerán los comentarios (JavaScript los agrega) -->
+      </ul>
+    </section>
+  </main>
+
+  <!-- ======================================================
+       4) PIE DE PÁGINA (lo que se ve siempre abajo del todo)
+       ====================================================== -->
+  <footer class="footer">
+    <p>© <span id="anio-actual"></span> Paola Gutiérrez · Todos los derechos reservados</p>
+  </footer>
+
+  <!-- ======================================================
+       5) BOTÓN FLOTANTE DE WHATSAPP
+       Este botón "flota" siempre visible en la esquina de la
+       pantalla, sin importar cuánto bajes la página, para que
+       la gente pueda escribir y comprar el libro fácilmente.
+       ====================================================== -->
+  <a
+    id="boton-whatsapp"
+    class="whatsapp-flotante"
+    href="#"
+    target="_blank"
+    rel="noopener"
+    aria-label="Escribir por WhatsApp"
+  >
+    <!-- Este dibujo (ícono) del teléfono está hecho con SVG, que es
+         como un "dibujo hecho de código". No es una imagen descargada,
+         así que se ve nítido en cualquier tamaño de pantalla. -->
+    <svg viewBox="0 0 32 32" width="30" height="30" fill="currentColor">
+      <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.909 6.478L4 29l7.72-1.876A11.94 11.94 0 0 0 16.001 27C22.628 27 28 21.627 28 15S22.628 3 16.001 3zm0 21.818a9.77 9.77 0 0 1-4.98-1.363l-.357-.213-4.583 1.113 1.135-4.47-.234-.366A9.78 9.78 0 0 1 6.182 15c0-5.42 4.4-9.818 9.819-9.818S25.818 9.58 25.818 15 21.42 24.818 16.001 24.818zm5.4-7.34c-.295-.148-1.748-.863-2.02-.962-.271-.099-.469-.148-.667.148-.198.296-.767.962-.94 1.16-.173.198-.346.222-.641.074-.296-.148-1.249-.46-2.379-1.468-.879-.784-1.472-1.752-1.645-2.048-.173-.296-.018-.456.13-.604.134-.133.296-.346.444-.519.148-.173.198-.296.296-.494.099-.198.05-.371-.024-.519-.074-.148-.667-1.608-.914-2.204-.24-.577-.485-.499-.667-.508l-.568-.01c-.198 0-.519.074-.79.371-.271.296-1.037 1.013-1.037 2.472s1.062 2.868 1.21 3.066c.148.198 2.09 3.19 5.062 4.474.707.305 1.259.487 1.689.623.71.226 1.356.194 1.867.118.57-.085 1.748-.715 1.995-1.406.247-.69.247-1.283.173-1.406-.074-.123-.271-.198-.567-.346z"/>
+    </svg>
+  </a>
+
+  <!-- El script (nuestro archivo de JavaScript) se pone AL FINAL del body
+       a propósito: así, cuando el JS se ejecute, todo el HTML de arriba
+       ya existe y JavaScript puede encontrarlo sin problema. -->
+  <script src="js/script.js"></script>
+</body>
+</html>
